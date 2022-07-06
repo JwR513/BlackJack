@@ -3,12 +3,8 @@ const hitButton = document.querySelector('#hit')
 const standButton = document.querySelector('#stand')
 const dealButton = document.querySelector('#deal')
 // player and dealer
-const player = {
-  hand: []
-}
-const dealer = {
-  hand: []
-}
+const playerHand = []
+const dealerHand = []
 let cards = []
 //Deck creator
 // used https://devdojo.com/devdojo/create-a-deck-of-cards-in-javascript to learn how to create a dec of cards
@@ -37,16 +33,28 @@ class Deck {
   }
 }
 const gameDeck = new Deck()
+// console.log(cards.Card.value)
 
-console.log(gameDeck)
 // add cards from deck to player and dealer hands
 const dealCards = () => {
   const randomCard1 = Math.floor(Math.random() * gameDeck.length)
   const randomCard2 = Math.floor(Math.random() * gameDeck.length)
-  dealer.hand.push(randomCard1, randomCard2)
+  const randomCard3 = Math.floor(Math.random() * gameDeck.length)
+  const randomCard4 = Math.floor(Math.random() * gameDeck.length)
+  const randomCard1Val = gameDeck[randomCard1]
+  const randomCard2Val = gameDeck[randomCard2]
+  dealerHand.push(randomCard1Val, randomCard2Val)
+  const randomCard3Val = gameDeck[randomCard3]
+  const randomCard4Val = gameDeck[randomCard4]
+  playerHand.push(randomCard3Val, randomCard4Val)
+
+  console.log(playerHand)
+  console.log(dealerHand.Card.value)
 }
-dealCards()
+
+const totalCardVal = () => {}
+
 //Event Handlers
-// dealButton.addEventListener('click')
+dealButton.addEventListener('click', dealCards)
 // hitButton.addEventListener('click')
 // standButton.addEventListener('click')
