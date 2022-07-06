@@ -43,6 +43,10 @@ a{
   font-size: x-large;
   border-radius: 45px;
 }
+#deal{
+  font-size: xx-large;
+  border-radius: 50px;
+}
 a:hover{
   text-decoration-color: white;
   text-decoration: underline;
