@@ -47,14 +47,18 @@ const dealCards = () => {
   const randomCard3Val = gameDeck[randomCard3]
   const randomCard4Val = gameDeck[randomCard4]
   playerHand.push(randomCard3Val, randomCard4Val)
-
   console.log(playerHand)
-  console.log(dealerHand.Card.value)
 }
 
-const totalCardVal = () => {}
-
+const hit = () => {
+  const genCard = Math.floor(Math.random() * gameDeck.length)
+  const hitCard = gameDeck[genCard]
+  playerHand.push(hitCard)
+  console.log(playerHand)
+}
+console.log(playerHand)
+console.log(dealerHand)
 //Event Handlers
 dealButton.addEventListener('click', dealCards)
-// hitButton.addEventListener('click')
+hitButton.addEventListener('click', hit)
 // standButton.addEventListener('click')

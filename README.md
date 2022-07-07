@@ -30,3 +30,5 @@
 ### **_Credits_**
 
 #### Credits will be added here as they are used in the project moving forward.
+
+[devdojo](https://devdojo.com/devdojo/create-a-deck-of-cards-in-javascript)
