@@ -2,10 +2,13 @@
 const hitButton = document.querySelector('#hit')
 const standButton = document.querySelector('#stand')
 const dealButton = document.querySelector('#deal')
+const resetButton = document.querySelector('#reset')
 // player ,dealer, cards
 const playerHand = []
 const dealerHand = []
 let cards = []
+let cardRemove = []
+let newGameDeck = []
 let pSum = 0
 let cSum = 0
 //Deck creator
@@ -35,6 +38,7 @@ class Deck {
   }
 }
 let gameDeck = new Deck()
+console.log(gameDeck)
 // add cards from deck to player and dealer hands
 const dealCards = () => {
   const randomCard1 = Math.floor(Math.random() * gameDeck.length)
@@ -42,23 +46,23 @@ const dealCards = () => {
   const randomCard3 = Math.floor(Math.random() * gameDeck.length)
   const randomCard4 = Math.floor(Math.random() * gameDeck.length)
   const randomCard1Val = gameDeck[randomCard1]
-  gameDeck.filter((deck) => {
-    return deck != randomCard1Val
-  })
-  console.log(gameDeck)
+  cardRemove.push(randomCard1Val)
   const randomCard2Val = gameDeck[randomCard2]
-  gameDeck.filter((deck) => {
-    return deck != randomCard2Val
-  })
+  cardRemove.push(randomCard2Val)
   dealerHand.push(randomCard1Val, randomCard2Val)
   const randomCard3Val = gameDeck[randomCard3]
-  gameDeck.filter((deck) => {
-    return deck != randomCard3Val
-  })
+  cardRemove.push(randomCard3Val)
   const randomCard4Val = gameDeck[randomCard4]
-  gameDeck.filter((deck) => {
-    return deck != randomCard4Val
+  cardRemove.push(randomCard4Val)
+  newGameDeck = gameDeck.filter((deck) => {
+    return (
+      deck != randomCard1Val &&
+      deck != randomCard2Val &&
+      deck != randomCard3Val &&
+      deck != randomCard4Val
+    )
   })
+  console.log(newGameDeck)
   playerHand.push(randomCard3Val, randomCard4Val)
   for (let i = 0; i < playerHand.length; i++) {
     pSum += playerHand[i].value
@@ -70,6 +74,7 @@ const dealCards = () => {
   console.log(cSum)
   console.log(playerHand)
   console.log(pSum)
+  dealButton.removeEventListener('click', dealCards)
 }
 //add card to playerhand on hit click
 const compare = () => {
@@ -86,6 +91,12 @@ const compare = () => {
     console.log('Player busted, Dealer Wins!')
   }
 }
+const hitScoreCheck = () => {
+  if (pSum > 21) {
+    stand()
+  }
+}
+
 const hit = () => {
   const genCard = Math.floor(Math.random() * gameDeck.length)
   const hitCard = gameDeck[genCard]
@@ -93,6 +104,7 @@ const hit = () => {
   pSum += hitCard.value
   console.log(pSum)
   console.log(playerHand)
+  hitScoreCheck()
 }
 const dealerHit = () => {
   const genCard = Math.floor(Math.random() * gameDeck.length)
@@ -104,7 +116,7 @@ const dealerHit = () => {
 }
 
 const stand = () => {
-  while (cSum < 17) {
+  while (cSum < 17 && pSum < 21) {
     dealerHit()
   }
   if (cSum > 17) {
