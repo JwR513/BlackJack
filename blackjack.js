@@ -34,7 +34,7 @@ class Deck {
     return cards
   }
 }
-const gameDeck = new Deck()
+let gameDeck = new Deck()
 // add cards from deck to player and dealer hands
 const dealCards = () => {
   const randomCard1 = Math.floor(Math.random() * gameDeck.length)
@@ -42,10 +42,23 @@ const dealCards = () => {
   const randomCard3 = Math.floor(Math.random() * gameDeck.length)
   const randomCard4 = Math.floor(Math.random() * gameDeck.length)
   const randomCard1Val = gameDeck[randomCard1]
+  gameDeck.filter((deck) => {
+    return deck != randomCard1Val
+  })
+  console.log(gameDeck)
   const randomCard2Val = gameDeck[randomCard2]
+  gameDeck.filter((deck) => {
+    return deck != randomCard2Val
+  })
   dealerHand.push(randomCard1Val, randomCard2Val)
   const randomCard3Val = gameDeck[randomCard3]
+  gameDeck.filter((deck) => {
+    return deck != randomCard3Val
+  })
   const randomCard4Val = gameDeck[randomCard4]
+  gameDeck.filter((deck) => {
+    return deck != randomCard4Val
+  })
   playerHand.push(randomCard3Val, randomCard4Val)
   for (let i = 0; i < playerHand.length; i++) {
     pSum += playerHand[i].value
@@ -59,6 +72,20 @@ const dealCards = () => {
   console.log(pSum)
 }
 //add card to playerhand on hit click
+const compare = () => {
+  if (pSum == cSum) {
+    console.log('Push')
+  } else if (pSum <= 21 && cSum < pSum) {
+    console.log('Player Wins')
+  } else if (cSum <= 21 && pSum < cSum) {
+    console.log('Dealer Wins')
+  }
+  if (cSum > 21) {
+    console.log('Dealer Busted, the player wins!')
+  } else if (pSum > 21) {
+    console.log('Player busted, Dealer Wins!')
+  }
+}
 const hit = () => {
   const genCard = Math.floor(Math.random() * gameDeck.length)
   const hitCard = gameDeck[genCard]
@@ -67,15 +94,22 @@ const hit = () => {
   console.log(pSum)
   console.log(playerHand)
 }
-const compare = () => {
-  if (pSum == cSum) {
-    console.log('Push')
-    reset()
-  }
+const dealerHit = () => {
+  const genCard = Math.floor(Math.random() * gameDeck.length)
+  const hitCard = gameDeck[genCard]
+  dealerHand.push(hitCard)
+  cSum += hitCard.value
+  console.log(cSum)
+  console.log(dealerHand)
 }
 
 const stand = () => {
-  compare()
+  while (cSum < 17) {
+    dealerHit()
+  }
+  if (cSum > 17) {
+    compare()
+  }
 }
 
 const reset = () => {}
