@@ -12,9 +12,6 @@
 .entities{
   display: flex;
   flex-direction: column;
-  background-image: url(istockphoto-1147481668-170667a.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
 }
 div{
   width: 100vw;
@@ -44,10 +41,15 @@ a{
   border-radius: 45px;
 }
 #deal{
-  font-size: xx-large;
+  font-size: x-large;
   border-radius: 50px;
+}
+#reset{
+font-size: x-large;
+border-radius: 50px;
 }
 a:hover{
   text-decoration-color: white;
   text-decoration: underline;
 }
+
