@@ -45,15 +45,16 @@ const dealCards = () => {
   const randomCard2 = Math.floor(Math.random() * gameDeck.length)
   const randomCard3 = Math.floor(Math.random() * gameDeck.length)
   const randomCard4 = Math.floor(Math.random() * gameDeck.length)
+
   const randomCard1Val = gameDeck[randomCard1]
   cardRemove.push(randomCard1Val)
   const randomCard2Val = gameDeck[randomCard2]
   cardRemove.push(randomCard2Val)
-  dealerHand.push(randomCard1Val, randomCard2Val)
   const randomCard3Val = gameDeck[randomCard3]
   cardRemove.push(randomCard3Val)
   const randomCard4Val = gameDeck[randomCard4]
   cardRemove.push(randomCard4Val)
+
   newGameDeck = gameDeck.filter((deck) => {
     return (
       deck != randomCard1Val &&
@@ -62,18 +63,21 @@ const dealCards = () => {
       deck != randomCard4Val
     )
   })
-  console.log(newGameDeck)
+  dealerHand.push(randomCard1Val, randomCard2Val)
   playerHand.push(randomCard3Val, randomCard4Val)
+
   for (let i = 0; i < playerHand.length; i++) {
     pSum += playerHand[i].value
   }
   for (let a = 0; a < dealerHand.length; a++) {
     cSum += dealerHand[a].value
   }
+
   console.log(dealerHand)
   console.log(cSum)
   console.log(playerHand)
   console.log(pSum)
+  console.log(newGameDeck)
   dealButton.removeEventListener('click', dealCards)
 }
 //add card to playerhand on hit click
@@ -91,6 +95,7 @@ const compare = () => {
     console.log('Player busted, Dealer Wins!')
   }
 }
+
 const hitScoreCheck = () => {
   if (pSum > 21) {
     stand()
@@ -98,14 +103,20 @@ const hitScoreCheck = () => {
 }
 
 const hit = () => {
-  const genCard = Math.floor(Math.random() * gameDeck.length)
-  const hitCard = gameDeck[genCard]
+  const genCard = Math.floor(Math.random() * newGameDeck.length)
+  const hitCard = newGameDeck[genCard]
   playerHand.push(hitCard)
   pSum += hitCard.value
   console.log(pSum)
-  console.log(playerHand)
+  console.log(playerHand.length)
+
+  if (playerHand.length >= 6) {
+    hitButton.removeEventListener('click', hit)
+  }
+
   hitScoreCheck()
 }
+
 const dealerHit = () => {
   const genCard = Math.floor(Math.random() * gameDeck.length)
   const hitCard = gameDeck[genCard]
@@ -124,9 +135,16 @@ const stand = () => {
   }
 }
 
-const reset = () => {}
+const reset = () => {
+  for (let i = 0; i < playerHand.length; i++) {
+    playerHand.splice(0, 6)
+  }
+  console.log(playerHand)
+  // dealCards()
+}
 
 //Event Handlers
 dealButton.addEventListener('click', dealCards)
 hitButton.addEventListener('click', hit)
 standButton.addEventListener('click', stand)
+resetButton.addEventListener('click', reset)
