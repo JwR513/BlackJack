@@ -79,6 +79,11 @@ const dealCards = () => {
 }
 //add card to playerhand on hit click
 const compare = () => {
+  if (cSum > 21) {
+    results.innerText = 'Dealer Busted, the player wins!'
+  } else if (pSum > 21) {
+    results.innerText = 'Player busted, Dealer Wins!'
+  }
   if (pSum == cSum) {
     console.log('Push')
   } else if (pSum <= 21 && cSum < pSum) {
@@ -86,13 +91,27 @@ const compare = () => {
   } else if (cSum <= 21 && pSum < cSum) {
     results.innerText = 'Dealer Wins'
   }
-  if (cSum > 21) {
-    results.innerText = 'Dealer Busted, the player wins!'
-  } else if (pSum > 21) {
-    results.innerText = 'Player busted, Dealer Wins!'
-  }
+}
+const dealerHit = () => {
+  const genCard = Math.floor(Math.random() * newGameDeck.length)
+  const hitCard = newGameDeck[genCard]
+  dealerHand.push(hitCard)
+  cSum += hitCard.value
+  changeScores()
 }
 
+const stand = () => {
+  if (pSum >= 21) {
+    compare()
+  } else {
+    while (cSum < 17) {
+      dealerHit()
+    }
+    if (cSum > 17) {
+      compare()
+    }
+  }
+}
 const hitScoreCheck = () => {
   if (pSum >= 21) {
     stand()
@@ -114,22 +133,6 @@ const hit = () => {
   hitScoreCheck()
 }
 
-const dealerHit = () => {
-  const genCard = Math.floor(Math.random() * newGameDeck.length)
-  const hitCard = newGameDeck[genCard]
-  dealerHand.push(hitCard)
-  cSum += hitCard.value
-  changeScores()
-}
-
-const stand = () => {
-  while (cSum < 17) {
-    dealerHit()
-  }
-  if (cSum > 17) {
-    compare()
-  }
-}
 const changeScores = () => {
   dealerScore.innerText = cSum
   playerScore.innerText = pSum
