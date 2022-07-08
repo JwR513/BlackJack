@@ -135,7 +135,6 @@ const hit = () => {
   if (playerHand.length >= 6 || pSum >= 21) {
     hitButton.removeEventListener('click', hit)
   }
-
   hitScoreCheck()
 }
 

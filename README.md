@@ -25,6 +25,10 @@
 
 ### **_Future Updates_**
 
+[ ] adding a shuffle deck fnc
+[ ] want to add a betting system
+[ ] score board tracking wins and losses
+
 #### Planned updates will be tracked and crossed off here as the project moves forward
 
 ### **_Credits_**
