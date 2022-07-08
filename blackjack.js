@@ -85,7 +85,7 @@ const compare = () => {
     results.innerText = 'Player busted, Dealer Wins!'
   }
   if (pSum == cSum) {
-    console.log('Push')
+    results.innerText = 'Push'
   } else if (pSum <= 21 && cSum < pSum) {
     results.innerText = `Player wins`
   } else if (cSum <= 21 && pSum < cSum) {
