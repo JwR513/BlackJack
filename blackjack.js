@@ -97,8 +97,9 @@ const compare = () => {
 }
 
 const hitScoreCheck = () => {
-  if (pSum > 21) {
+  if (pSum >= 21) {
     stand()
+    standButton.removeEventListener('click', stand)
   }
 }
 
@@ -106,11 +107,11 @@ const hit = () => {
   const genCard = Math.floor(Math.random() * newGameDeck.length)
   const hitCard = newGameDeck[genCard]
   playerHand.push(hitCard)
+  // thought about adding a way to remove hit cards from deck but due to time decided against it will do eventually if i decide to update it
   pSum += hitCard.value
   console.log(pSum)
-  console.log(playerHand.length)
-
-  if (playerHand.length >= 6) {
+  console.log(playerHand)
+  if (playerHand.length >= 6 || pSum >= 21) {
     hitButton.removeEventListener('click', hit)
   }
 
@@ -118,8 +119,8 @@ const hit = () => {
 }
 
 const dealerHit = () => {
-  const genCard = Math.floor(Math.random() * gameDeck.length)
-  const hitCard = gameDeck[genCard]
+  const genCard = Math.floor(Math.random() * newGameDeck.length)
+  const hitCard = newGameDeck[genCard]
   dealerHand.push(hitCard)
   cSum += hitCard.value
   console.log(cSum)
@@ -127,7 +128,7 @@ const dealerHit = () => {
 }
 
 const stand = () => {
-  while (cSum < 17 && pSum < 21) {
+  while (cSum < 17) {
     dealerHit()
   }
   if (cSum > 17) {
@@ -136,11 +137,7 @@ const stand = () => {
 }
 
 const reset = () => {
-  for (let i = 0; i < playerHand.length; i++) {
-    playerHand.splice(0, 6)
-  }
-  console.log(playerHand)
-  // dealCards()
+  window.location.reload()
 }
 
 //Event Handlers
