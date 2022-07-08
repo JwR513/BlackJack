@@ -32,16 +32,16 @@ a{
   height: 200px;
   border-radius: 50%;
   border: 2px solid black;
-  float: right;
+  float: left;
   font-size: 100px;
   text-align: center;
 }
 .dealer-score{
+  float: left;
   width: 200px;
   height: 200px;
   border-radius: 50%;
   border: 2px solid black;
-  float: right;
   font-size: 100px;
   text-align: center;
 }
@@ -52,7 +52,7 @@ border-radius: 50px;
 }
 p{
   text-align: center;
-  font-size: xx-large;
+  font-size: 85px;
 }
 a:hover{
   text-decoration-color: white;

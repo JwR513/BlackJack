@@ -5,6 +5,7 @@ const dealButton = document.querySelector('#deal')
 const resetButton = document.querySelector('#reset')
 const dealerScore = document.querySelector('.dealer-score')
 const playerScore = document.querySelector('.player-score')
+const results = document.querySelector('p')
 // player ,dealer, cards
 const playerHand = []
 const dealerHand = []
@@ -40,7 +41,6 @@ class Deck {
   }
 }
 let gameDeck = new Deck()
-console.log(gameDeck)
 // add cards from deck to player and dealer hands
 const dealCards = () => {
   const randomCard1 = Math.floor(Math.random() * gameDeck.length)
@@ -74,12 +74,6 @@ const dealCards = () => {
   for (let a = 0; a < dealerHand.length; a++) {
     cSum += dealerHand[a].value
   }
-
-  console.log(dealerHand)
-  console.log(cSum)
-  console.log(playerHand)
-  console.log(pSum)
-  console.log(newGameDeck)
   changeScores()
   dealButton.removeEventListener('click', dealCards)
 }
@@ -88,14 +82,14 @@ const compare = () => {
   if (pSum == cSum) {
     console.log('Push')
   } else if (pSum <= 21 && cSum < pSum) {
-    console.log('Player Wins')
+    results.innerText = `Player wins`
   } else if (cSum <= 21 && pSum < cSum) {
-    console.log('Dealer Wins')
+    results.innerText = 'Dealer Wins'
   }
   if (cSum > 21) {
-    console.log('Dealer Busted, the player wins!')
+    results.innerText = 'Dealer Busted, the player wins!'
   } else if (pSum > 21) {
-    console.log('Player busted, Dealer Wins!')
+    results.innerText = 'Player busted, Dealer Wins!'
   }
 }
 
@@ -112,8 +106,6 @@ const hit = () => {
   playerHand.push(hitCard)
   // thought about adding a way to remove hit cards from deck but due to time decided against it will do eventually if i decide to update it
   pSum += hitCard.value
-  console.log(pSum)
-  console.log(playerHand)
   changeScores()
   if (playerHand.length >= 6 || pSum >= 21) {
     hitButton.removeEventListener('click', hit)
@@ -127,8 +119,6 @@ const dealerHit = () => {
   const hitCard = newGameDeck[genCard]
   dealerHand.push(hitCard)
   cSum += hitCard.value
-  console.log(cSum)
-  console.log(dealerHand)
   changeScores()
 }
 
