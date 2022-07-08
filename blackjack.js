@@ -3,6 +3,8 @@ const hitButton = document.querySelector('#hit')
 const standButton = document.querySelector('#stand')
 const dealButton = document.querySelector('#deal')
 const resetButton = document.querySelector('#reset')
+const dealerScore = document.querySelector('.dealer-score')
+const playerScore = document.querySelector('.player-score')
 // player ,dealer, cards
 const playerHand = []
 const dealerHand = []
@@ -78,6 +80,7 @@ const dealCards = () => {
   console.log(playerHand)
   console.log(pSum)
   console.log(newGameDeck)
+  changeScores()
   dealButton.removeEventListener('click', dealCards)
 }
 //add card to playerhand on hit click
@@ -111,6 +114,7 @@ const hit = () => {
   pSum += hitCard.value
   console.log(pSum)
   console.log(playerHand)
+  changeScores()
   if (playerHand.length >= 6 || pSum >= 21) {
     hitButton.removeEventListener('click', hit)
   }
@@ -125,6 +129,7 @@ const dealerHit = () => {
   cSum += hitCard.value
   console.log(cSum)
   console.log(dealerHand)
+  changeScores()
 }
 
 const stand = () => {
@@ -134,6 +139,10 @@ const stand = () => {
   if (cSum > 17) {
     compare()
   }
+}
+const changeScores = () => {
+  dealerScore.innerText = cSum
+  playerScore.innerText = pSum
 }
 
 const reset = () => {
