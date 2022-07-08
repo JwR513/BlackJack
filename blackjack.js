@@ -80,15 +80,21 @@ const dealCards = () => {
 //add card to playerhand on hit click
 const compare = () => {
   if (cSum > 21) {
+    document.body.style.backgroundColor = 'green'
     results.innerText = 'Dealer Busted, the player wins!'
   } else if (pSum > 21) {
+    document.body.style.backgroundColor = 'red'
     results.innerText = 'Player busted, Dealer Wins!'
   }
   if (pSum == cSum) {
     results.innerText = 'Push'
+    document.body.style.backgroundColor = 'grey'
+    reset()
   } else if (pSum <= 21 && cSum < pSum) {
+    document.body.style.backgroundColor = 'green'
     results.innerText = `Player wins`
   } else if (cSum <= 21 && pSum < cSum) {
+    document.body.style.backgroundColor = 'red'
     results.innerText = 'Dealer Wins'
   }
 }
@@ -107,7 +113,7 @@ const stand = () => {
     while (cSum < 17) {
       dealerHit()
     }
-    if (cSum > 17) {
+    if (cSum >= 17) {
       compare()
     }
   }
